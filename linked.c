@@ -41,14 +41,16 @@ args_t *add(args_t **head, char* arg)
  * @head: head of the list
  * Return: i
  */
-size_t print(args_t *head)
-{
+	size_t print(args_t *head)
+	{
 	int i;
 
 		for (i = 0; head; i++)
-		head = head->next;
+		{
+			printf("argument -> [%s]", head->arg);
+		}
 		return(i);
-}
+	}
 
 /**
  * transform - transform

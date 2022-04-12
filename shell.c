@@ -41,18 +41,7 @@ int main(int argc, char **argv, char **env)
 			add(&arguments, arg);
 		}
 
-		size_t print(args_t *head)
-	{
 
-		int i;
-
-		for(i = 0; head; i++)
-		{
-			printf("argument -> [%s]", head->arg);
-
-		}
-		return (i);
-	}
 
 
 	}while(1);
