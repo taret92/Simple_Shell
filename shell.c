@@ -13,18 +13,13 @@ int main(void)
 
 	command_t built_ins[] = {{"exit", exit2},
 							 {NULL, NULL}};
-
 	if (isatty(STDIN_FILENO) == 0)
 		tty = 0;
-	do
-	{
+	do {
 		if (tty == 1)
 			write(STDOUT_FILENO, "($) ", 4);
 		fflush(stdin);
 		str = line_read();
-
-		printf("El comando es: %s\n", str);
-
 		tokens = _strtok(tokens, str, " \t\n");
 		for (i = 0; built_ins[i].name; i++)
 		{
@@ -56,8 +51,8 @@ int main(void)
 }
 
 /**
- *
- *
+ * line_read - get the line
+ * Return: str
  */
 char *line_read(void)
 {
