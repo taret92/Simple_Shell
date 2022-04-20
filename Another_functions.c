@@ -33,13 +33,45 @@ char **_strtok(char **tokens, char *str, char *delim)
 }
 
 /**
- * exit2 - exit
- * @tokens: tokens.
- * Return: 0
+ * exe_exit - built in function for exit
+ * @args: arguments
+ * Return: 1
  */
 
-int exit2(char **tokens)
+int exe_exit(char **args)
 {
-	free(tokens);
-	exit(EXIT_SUCCESS);
+	(void)(args);
+
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * _strlen - Counts the lenght of string
+ *
+ *
+ * @s: Input string
+ *
+ * Return: Returns the value of the lenght var
+ *
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (s[i])
+		i++;
+
+	return (i);
 }

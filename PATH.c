@@ -11,13 +11,13 @@ char *PATH(char *comm)
 	extern char **environ;
 	char *dup = NULL;
 	char **env = environ;
-	char **funclist = malloc(512 * sizeof(char *)), *funcs = NULL;
+	char **funclist = malloc(102450 * sizeof(char *)), *funcs = NULL;
 	struct stat stats;
 	int count = 0, i = 0;
 
 	for (count = 0; env[count] != NULL; count++)
 	{
-		if ((strncmp("PATH", env[count], 4)) == 0)
+		if ((strncmp("PATH", env[count], sizeof(5000))) == 0)
 			break;
 	}
 	dup = strdup(env[count]);

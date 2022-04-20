@@ -11,8 +11,9 @@ int main(void)
 	char **tokens = NULL, *str = NULL;
 	int i = 0, tty = 1;
 
-	command_t built_ins[] = {{"exit", exit2},
+	command_t built_ins[] = {{"exit", exe_exit},
 							 {NULL, NULL}};
+	signal(SIGINT, ctrl_c);
 	if (isatty(STDIN_FILENO) == 0)
 		tty = 0;
 	do {
@@ -26,8 +27,7 @@ int main(void)
 			if (built_ins[i].name == tokens[0])
 			{
 				if ((built_ins[i].function(tokens)) == 1)
-					return (EXIT_SUCCESS);
-			}
+					return (EXIT_SUCCESS); }
 		}
 		if (!tokens[0])
 		{
@@ -40,10 +40,8 @@ int main(void)
 		else
 		{
 			tokens[0] = PATH(tokens[0]);
-			if (tokens[0] == NULL)
-				perror("Error: ");
-			else
-				execute(tokens);
+			(tokens[0] != NULL ? execute(tokens) : perror("Error"))
+				;
 		}
 	} while (1);
 	free(tokens);
