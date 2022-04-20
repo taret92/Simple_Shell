@@ -12,7 +12,9 @@
 #include <signal.h>
 
 /**
- * built_in - Struct
+ * struct built_in - Struct from shell
+ * @name: Type character
+ * @function: Type integer
  */
 typedef struct built_in
 {
