@@ -1,51 +1,68 @@
 #include "main.h"
 /**
- * 
- * @param argc 
- * @param argv 
- * @param env 
- * Return: 0
+ * main - shell
+ * @argc - number of arguments
+ * @argv - arguments
+ * @envp - environment
+ * Return: Success!
  */
-
-int main(int argc, char **argv, char **env)
+int main(void)
 {
-	UNUSED(argc);
-	UNUSED(argv);
-	UNUSED(env);
-	{
-	int read;
-	int tty = 1;
-	size_t len = 0;
-	char *line, *cpy, *arg;
-	args_t *arguments;
-	
+	char *str = NULL, **tokens;
+	size_t j = 0;
+	int i = 0, getline2, tty = 1;
+	command_t built_ins[] = {{"exit", exit2},
+							 {NULL, NULL}};
 
-	isatty(STDIN_FILENO) == 0 ? tty = 0 : tty;
+	if (isatty(STDIN_FILENO) == 0)
+		tty = 0;
+	do {
+		str = NULL, tokens = NULL;
+		j = 0;
 
-	do{
-		tty == 1 ? write(STDOUT_FILENO, "($) ", 4) : 0;
+		if (tty == 1)
+			write(STDOUT_FILENO, "($) ", 4);
 		fflush(stdin);
-		read = getline(&line, &len, stdin);
-		if(read == -1)
-		{
-			return(-1);
-		}
-		cpy = strdup(line);
 
-		for (; (arg = strtok(cpy, " \t\n")); cpy = NULL)
+		getline2 = getline(&str, &j, stdin);
+		if (getline2 == -1)
 		{
-			if(arg == NULL)
+			perror("Error: ");
+			free(str);
+			if (feof(stdin))
+				return (EXIT_SUCCESS);
+			else
+				return (EXIT_FAILURE);
+		}
+
+		printf("El comando es: %s\n", str);
+
+		tokens = _strtok(tokens, str, " \t\n");
+		for (i = 0; built_ins[i].name; i++)
+		{
+			if (built_ins[i].name == tokens[0])
 			{
-				break;
+				if ((built_ins[i].function(tokens)) == 1)
+					return (EXIT_SUCCESS);
 			}
-			add(&arguments, arg);
 		}
-
-
-
-
-	}while(1);
-
-	return(0);
-}
+		if (!tokens[0])
+		{
+			free(tokens);
+			free(str);
+			continue;
+		}
+		if (tokens[0][0] == '/')
+			execute(tokens);
+		else
+		{
+			tokens[0] = PATH(tokens[0]);
+			if (tokens[0] == NULL)
+				perror("Error: ");
+			else
+				execute(tokens);
+		}
+	} while (1);
+	free(tokens);
+	return (0);
 }

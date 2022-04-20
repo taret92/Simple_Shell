@@ -9,17 +9,17 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-typedef struct args_s
+typedef struct built_in
 {
-	char* arg;
-	struct args_s *next;
-} args_t;
+    char *name;
+    int (*function)(char**);
+} command_t;
 
-args_t *add(args_t **head, char* arg);
-size_t print(args_t *head);
-char **transform(args_t **head);
-size_t print(args_t *head);
-
+void execute(char **tokens);
+char *PATH(char *comm);
+pid_t fork(void);
+char **_strtok(char **tokens, char *str, char *delim);
+int exit2(char **tokens);
 #define UNUSED(x) (void)(x);
 
 #endif

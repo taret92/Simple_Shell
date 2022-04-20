@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * find_path - searc the commands in path
+ * PATH - search the commands in path
  * @comm: Commands
  * Return: 0
  */
 
 char *PATH(char *comm)
 {
-	extern char **environ;
+	char **environ;
 	char *dup = NULL;
 	char **env = environ;
 	char **funclist = malloc(512 * sizeof(char *)), *funcs = NULL;
