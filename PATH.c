@@ -8,7 +8,6 @@
 
 char *PATH(char *comm)
 {
-	extern char **environ;
 	char *dup = NULL;
 	char **env = environ;
 	char **funclist = malloc(102450 * sizeof(char *)), *funcs = NULL;

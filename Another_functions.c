@@ -34,7 +34,7 @@ char **_strtok(char **tokens, char *str, char *delim)
 
 /**
  * exe_exit - built in function for exit
- * @args: arguments
+ * @tokens: arguments
  * Return: 1
  */
 
