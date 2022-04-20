@@ -9,10 +9,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+/**
+ * built_in - Struct
+ */
 typedef struct built_in
 {
-    char *name;
-    int (*function)(char**);
+	char *name;
+	int (*function)(char **);
 } command_t;
 
 void execute(char **tokens);
@@ -20,6 +23,6 @@ char *PATH(char *comm);
 pid_t fork(void);
 char **_strtok(char **tokens, char *str, char *delim);
 int exit2(char **tokens);
-#define UNUSED(x) (void)(x);
+char *line_read(void);
 
 #endif

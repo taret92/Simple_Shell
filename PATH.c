@@ -8,7 +8,7 @@
 
 char *PATH(char *comm)
 {
-	char **environ;
+	extern char **environ;
 	char *dup = NULL;
 	char **env = environ;
 	char **funclist = malloc(512 * sizeof(char *)), *funcs = NULL;
@@ -32,10 +32,12 @@ char *PATH(char *comm)
 			free(dup);
 			return (funclist[i]);
 		}
+		free(funclist[i]);
 		i++;
 		funcs = strtok(NULL, ":");
-		free(dup);
-		free(funclist);
 	}
+	free(funclist[i]);
+	free(funclist);
+	free(dup);
 	return (NULL);
 }

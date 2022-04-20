@@ -8,32 +8,20 @@
  */
 int main(void)
 {
-	char *str = NULL, **tokens;
-	size_t j = 0;
-	int i = 0, getline2, tty = 1;
+	char **tokens = NULL, *str = NULL;
+	int i = 0, tty = 1;
+
 	command_t built_ins[] = {{"exit", exit2},
 							 {NULL, NULL}};
 
 	if (isatty(STDIN_FILENO) == 0)
 		tty = 0;
-	do {
-		str = NULL, tokens = NULL;
-		j = 0;
-
+	do
+	{
 		if (tty == 1)
 			write(STDOUT_FILENO, "($) ", 4);
 		fflush(stdin);
-
-		getline2 = getline(&str, &j, stdin);
-		if (getline2 == -1)
-		{
-			perror("Error: ");
-			free(str);
-			if (feof(stdin))
-				return (EXIT_SUCCESS);
-			else
-				return (EXIT_FAILURE);
-		}
+		str = line_read();
 
 		printf("El comando es: %s\n", str);
 
@@ -65,4 +53,31 @@ int main(void)
 	} while (1);
 	free(tokens);
 	return (0);
+}
+
+/**
+ *
+ *
+ */
+char *line_read(void)
+{
+	int getline2;
+	size_t j = 0;
+	char *str = NULL;
+
+	getline2 = getline(&str, &j, stdin);
+	if (getline2 == -1)
+	{
+		if (feof(stdin))
+		{
+			free(str);
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			perror("get_line");
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (str);
 }
