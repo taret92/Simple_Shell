@@ -75,3 +75,22 @@ int _strlen(char *s)
 
 	return (i);
 }
+
+/**
+ * _strcat - Print characters
+ * @dest: Input string 1
+ * @src: Input string 2
+ * Return: Concatenated strings
+ */
+
+char *_strcat(char *dest, char *src)
+{
+	char *p = dest;
+
+	while (*p)
+		p++;
+	while (*src)
+		*p++ = *src++;
+	*p = '\0';
+	return (dest);
+}

@@ -32,5 +32,6 @@ char *line_read(void);
 void ctrl_c(int sig);
 int _putchar(char c);
 int _strlen(char *s);
+char *_strcat(char *dest, char *src);
 
 #endif

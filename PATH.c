@@ -25,8 +25,8 @@ char *PATH(char *comm)
 	while (funcs != NULL)
 	{
 		funclist[i] = strdup(funcs);
-		strcat(funclist[i], "/");
-		strcat(funclist[i], comm);
+		_strcat(funclist[i], "/");
+		_strcat(funclist[i], comm);
 		if (stat(funclist[i], &stats) == 0)
 		{
 			free(dup);
