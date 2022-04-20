@@ -38,9 +38,9 @@ char **_strtok(char **tokens, char *str, char *delim)
  * Return: 1
  */
 
-int exe_exit(char **args)
+int exe_exit(char **tokens)
 {
-	(void)(args);
+	(void)(tokens);
 
 	return (EXIT_SUCCESS);
 }
