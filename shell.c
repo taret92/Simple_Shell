@@ -71,6 +71,7 @@ char *line_read(void)
 			perror("get_line");
 			exit(EXIT_FAILURE);
 		}
+		free(str);
 	}
 	return (str);
 }
